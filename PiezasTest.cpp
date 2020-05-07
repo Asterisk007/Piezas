@@ -220,5 +220,5 @@ TEST(PiezasTest, tie_game_rows){
 
 	// Players have an equal number of rows.
 	// Thus, the game is a tie.
-	ASSERT_TRUE(obj.gameState() == Invalid);
+	ASSERT_TRUE(obj.gameState() == Blank);
 }

@@ -1,5 +1,6 @@
 #include "Piezas.h"
 #include <vector>
+#include <iostream>
 /** CLASS Piezas
  * Class for representing a Piezas vertical board, which is roughly based
  * on the game "Connect Four" where pieces are placed in a column and 
@@ -153,13 +154,15 @@ Piece Piezas::gameState()
     // Check for the same piece on every row
     // 3x1
     for (int i = 0; i < 3; i++){
-        if ( (board[i][0] == board[i][1]) && (board[i][1] == board[i][2]) ){
+        if ( (board[i][0] == board[i][1]) && (board[i][1] == board[i][2]) && (board[i][2] != board[i][3]) ){
+            std::cerr << "Segfault happening in 3x1 check, first if" << std::endl;
             if (board[i][1] == X){
                 player_X_lines += 1;
             } else {
                 player_O_lines += 1;
             }
-        } else if ( (board[i][1] == board[i][2]) && (board[i][2] == board[i][3]) ){
+        } else if ( (board[i][0] != board[i][1]) && (board[i][1] == board[i][2]) && (board[i][2] == board[i][3]) ){
+            std::cerr << "Segfault happening in 3x1 check, second if" << std::endl;
             if (board[i][1] == X){
                 player_X_lines += 1;
             } else {
@@ -170,6 +173,7 @@ Piece Piezas::gameState()
     // 4x1
     for (int i = 0; i < 3; i++){
         if ( (board[i][0] == board[i][1]) && (board[i][1] == board[i][2]) && (board[i][2] == board[i][3]) ){
+            std::cerr << "Segfault happening in 4x1 check" << std::endl;
             if (board[i][0] == X){
                 player_X_lines += 1;
             } else {
