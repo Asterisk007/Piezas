@@ -49,7 +49,7 @@ TEST(PiezasTest, out_of_bounds_column_returns_invalid){
 
 // Esure that resetting the board causes all spaces to be Blank
 TEST(PiezasTest, reset_board_is_blank){
-	PiezasTest obj;
+	Piezas obj;
 	for (int i = 0; i < 3; i++){
 		for (int j = 0; j < 4; j++){
 			obj.dropPiece(j);
