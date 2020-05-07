@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/Asterisk007/Piezas.svg?branch=master)](https://travis-ci.org/Asterisk007/Piezas)
-[![Coverage Status](https://coveralls.io/repos/github/Asterisk007/Piezas/badge.svg?branch=master)](https://coveralls.io/github/Asterisk007/Piezas?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/Asterisk007/Piezas/badge.svg?branch=master&kill_cache=1)](https://coveralls.io/github/Asterisk007/Piezas?branch=master)
 
 # Piezas
 
