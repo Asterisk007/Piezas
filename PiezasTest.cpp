@@ -249,6 +249,56 @@ TEST(PiezasTest, tie_game_1){
 
 	ASSERT_TRUE(obj.gameState() == Blank);
 }
+// Testing a tied pattern
+/* Pattern:
+	XXXO
+	OOOO
+	XXXO
+*/
+TEST(PiezasTest, tie_game_2){
+	Piezas obj;
+	obj.dropPiece(0);
+	obj.dropPiece(0);
+	obj.dropPiece(1);
+	obj.dropPiece(1);
+
+	obj.dropPiece(2);
+	obj.dropPiece(3);
+	obj.dropPiece(0);
+	obj.dropPiece(2);
+
+	obj.dropPiece(1);
+	obj.dropPiece(3);
+	obj.dropPiece(2);
+	obj.dropPiece(3);
+
+	ASSERT_TRUE(obj.gameState() == Blank);
+}\
+// Testing a tied pattern
+/* Pattern:
+	OOOX
+	XXXX
+	OOOX
+*/
+TEST(PiezasTest, tie_game_3){
+	Piezas obj;
+	obj.dropPiece(3);
+	obj.dropPiece(2);
+	obj.dropPiece(3);
+	obj.dropPiece(1);
+
+	obj.dropPiece(2);
+	obj.dropPiece(0);
+	obj.dropPiece(1);
+	obj.dropPiece(2);
+
+	obj.dropPiece(3);
+	obj.dropPiece(1);
+	obj.dropPiece(0);
+	obj.dropPiece(0);
+
+	ASSERT_TRUE(obj.gameState() == Blank);
+}
 
 // Now for some dummy patterns (i.e. completely irregular games, but ensures that the class
 // can determine that a game where both players forming the same number of lines is counted as a tie)
