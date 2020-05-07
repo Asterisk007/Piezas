@@ -124,7 +124,7 @@ TEST(PiezasTest, tie_game){
 	OXXX
 	OOOX
 */
-TEST(PiezasTest, X_wins_pattern1){
+TEST(PiezasTest, X_wins_3x1_middle_right){
 	Piezas obj;
 	obj.dropPiece(3);
 	obj.dropPiece(2);
@@ -152,7 +152,7 @@ TEST(PiezasTest, X_wins_pattern1){
 	XXOX
 	OOOX
 */
-TEST(PiezasTest, O_wins_pattern1){
+TEST(PiezasTest, O_wins_3x1_bottom_left){
 	Piezas obj;
 	obj.dropPiece(3);
 	obj.dropPiece(0);
@@ -172,9 +172,60 @@ TEST(PiezasTest, O_wins_pattern1){
 	// left corner of the board.
 	ASSERT_TRUE(obj.gameState() == O);
 }
+// Testing a pattern where X wins
+// For the sake of satisfying the code coverage
+/* Pattern:
+	OXOX
+	XXXO
+	OOXO
+*/
+TEST(PiezasTest, X_wins_3x1_middle_left){
+	Piezas obj;
+	obj.dropPiece(2);
+	obj.dropPiece(1);
+	obj.dropPiece(1);
+	obj.dropPiece(3);
+
+	obj.dropPiece(2);
+	obj.dropPiece(0);
+	obj.dropPiece(0);
+	obj.dropPiece(3);
+
+	obj.dropPiece(3);
+	obj.dropPiece(2);
+	obj.dropPiece(1);
+	obj.dropPiece(0);
+
+	ASSERT_TRUE(obj.gameState() == X);
+}
+// Testing a tied pattern
+/* Pattern:
+	XOOX
+	OOOX
+	XXXO
+*/
+TEST(PiezasTest, tie_game_1){
+	Piezas obj;
+	obj.dropPiece(0);
+	obj.dropPiece(0);
+	obj.dropPiece(1);
+	obj.dropPiece(1);
+
+	obj.dropPiece(2);
+	obj.dropPiece(3);
+	obj.dropPiece(3);
+	obj.dropPiece(2);
+
+	obj.dropPiece(0);
+	obj.dropPiece(1);
+	obj.dropPiece(3);
+	obj.dropPiece(2);
+
+	ASSERT_TRUE(obj.gameState() == Blank);
+}
 
 // Now for some dummy patterns (i.e. completely irregular games, but ensures that the class
-// can determine that a game where either player creates the same number of lines is counted as a tie)
+// can determine that a game where both players forming the same number of lines is counted as a tie)
 
 // This game is a tie
 /* Pattern:
