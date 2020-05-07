@@ -74,7 +74,7 @@ TEST(PiezasTest, tie_game){
 		}
 		alternate = !alternate;
 	}
-	ASSERT_EQ(obj.gameState, Blank);
+	ASSERT_TRUE(obj.gameState() == Blank);
 }
 
 // Testing a pattern where X wins
@@ -102,7 +102,7 @@ TEST(PiezasTest, X_wins_pattern1){
 	/*
 	Board should now have the specified pattern
 	*/
-	ASSERT_EQ(obj.gameState, X);
+	ASSERT_TRUE(obj.gameState() == X);
 }
 
 // Testing a pattern where O wins by a hair
@@ -129,5 +129,5 @@ TEST(PiezasTest, O_wins_pattern1){
 	obj.dropPiece(0);
 	// O should win by the horizontal 3x1 line in the lower
 	// left corner of the board.
-	ASSERT_EQ(obj.gameState, O);
+	ASSERT_TRUE(obj.gameState() == O);
 }
