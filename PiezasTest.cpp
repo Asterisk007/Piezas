@@ -200,7 +200,7 @@ TEST(PiezasTest, tie_game_columns){
 	OOOO
 	XXXX
 */
-TEST(PiezasTest, tie_game_columns){
+TEST(PiezasTest, tie_game_rows){
 	Piezas obj;
 	
 	obj.dropPiece(0);
