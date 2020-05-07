@@ -77,8 +77,10 @@ Piece Piezas::dropPiece(int column)
                 }
                 turn = X;
                 return O;
+            /* Obsolete. Turn will never be anything but X or O.
             default:
                 return Blank;
+            */
         }
     // If column is full, the other player gets their turn; return Blank.
     } else {

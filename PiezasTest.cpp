@@ -29,6 +29,21 @@ TEST(PiezasTest, drop_test){
 	ASSERT_EQ(obj.dropPiece(0), O);
 }
 
+// Ensure that we can check where a piece is.
+TEST(PiezasTest, piece_at_test){
+	Piezas obj;
+	obj.dropPiece(0);
+	obj.dropPiece(1);
+	ASSERT_TRUE(obj.pieceAt(0, 0) == X);
+	ASSERT_TRUE(obj.pieceAt(0, 1) == O);
+}
+
+// Ensure that if we check an area out of bounds, we get Invalid.
+TEST(PiezasTest, piece_at_test_invalid){
+	Piezas obj;
+	ASSERT_TRUE(obj.pieceAt(4, 5) == Invalid);
+}
+
 // Ensure that one cannot drop a piece in a full column.
 TEST(PiezasTest, full_column_returns_blank){
 	Piezas obj;
@@ -36,6 +51,8 @@ TEST(PiezasTest, full_column_returns_blank){
 	obj.dropPiece(0);
 	obj.dropPiece(0);
 	// A full column should return blank.
+	ASSERT_EQ(obj.dropPiece(0), Blank);
+	// Do this twice for code coverage.
 	ASSERT_EQ(obj.dropPiece(0), Blank);
 }
 
@@ -45,6 +62,14 @@ TEST(PiezasTest, out_of_bounds_column_returns_invalid){
 	// An out-of-bounds column should return Invalid.
 	ASSERT_EQ(obj.dropPiece(-1), Invalid);
 	ASSERT_EQ(obj.dropPiece(4), Invalid);
+}
+
+// Ensure that if a game is not yet complete, the board returns Invalid
+// as the current game state.
+TEST(PiezasTest, unfinished_game_returns_invalid){
+	Piezas obj;
+	obj.dropPiece(0);
+	ASSERT_TRUE(obj.gameState() == Invalid);
 }
 
 // Esure that resetting the board causes all spaces to be Blank
@@ -67,13 +92,9 @@ TEST(PiezasTest, reset_board_is_blank){
 	ASSERT_TRUE(actual);
 }
 
-// Testing game win states
-
-// All patterns being tested are the result of normal
+/* Testing game win patterns */
+// All patterns being tested here are the result of
 // games where each player makes a valid move each turn.
-
-// Other tests ensure that the program works correctly, i.e. giving
-// the opponent their turn if either player submits an invalid move.
 
 // Testing a pattern where no one wins (tie)
 /* Pattern:
@@ -150,4 +171,54 @@ TEST(PiezasTest, O_wins_pattern1){
 	// O should win by the horizontal 3x1 line in the lower
 	// left corner of the board.
 	ASSERT_TRUE(obj.gameState() == O);
+}
+
+// Now for some dummy patterns (i.e. completely irregular games, but ensures that the class
+// can determine that a game where either player creates the same number of lines is counted as a tie)
+
+// This game is a tie
+/* Pattern:
+	XOXO
+	XOXO
+	XOXO
+*/
+TEST(PiezasTest, tie_game_columns){
+	Piezas obj;
+	for (int i = 0; i < 3; i++){
+		for (int j = 0; j < 4; j++){
+			obj.dropPiece(j);
+		}
+	}
+	// Players have an equal number of columns. Thus,
+	// the game is a tie.
+	ASSERT_TRUE(obj.gameState() == Blank);
+}
+
+// This game is also a tie, but using another pattern
+/* Pattern:
+	XOXO
+	OOOO
+	XXXX
+*/
+TEST(PiezasTest, tie_game_columns){
+	Piezas obj;
+	
+	obj.dropPiece(0);
+	obj.dropPiece(0);
+	obj.dropPiece(1);
+	obj.dropPiece(1);
+
+	obj.dropPiece(2);
+	obj.dropPiece(2);
+	obj.dropPiece(3);
+	obj.dropPiece(3);
+
+	obj.dropPiece(0);
+	obj.dropPiece(1);
+	obj.dropPiece(2);
+	obj.dropPiece(3);
+
+	// Players have an equal number of rows.
+	// Thus, the game is a tie.
+	ASSERT_TRUE(obj.gameState() == Blank);
 }
