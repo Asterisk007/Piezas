@@ -47,6 +47,26 @@ TEST(PiezasTest, out_of_bounds_column_returns_invalid){
 	ASSERT_EQ(obj.dropPiece(4), Invalid);
 }
 
+// Esure that resetting the board causes all spaces to be Blank
+TEST(PiezasTest, reset_board_is_blank){
+	PiezasTest obj;
+	for (int i = 0; i < 3; i++){
+		for (int j = 0; j < 4; j++){
+			obj.dropPiece(j);
+		}
+	}
+	obj.reset();
+	bool actual = true;
+	for (int i = 0; i < 3; i++){
+		for (int j = 0; j < 4; j++){
+			if (board.pieceAt(i, j) != Blank){
+				actual = false;
+			}
+		}
+	}
+	ASSERT_TRUE(actual);
+}
+
 // Testing game win states
 
 // All patterns being tested are the result of normal
@@ -105,7 +125,7 @@ TEST(PiezasTest, X_wins_pattern1){
 	ASSERT_TRUE(obj.gameState() == X);
 }
 
-// Testing a pattern where O wins by a hair
+// Testing a pattern where O wins
 /* Pattern:
 	OXXO
 	XXOX
