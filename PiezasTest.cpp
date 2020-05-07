@@ -198,6 +198,32 @@ TEST(PiezasTest, X_wins_3x1_middle_left){
 
 	ASSERT_TRUE(obj.gameState() == X);
 }
+// Testing a pattern where O wins
+// For the sake of satisfying the code coverage
+/* Pattern:
+	XOXX
+	XOOO
+	OXXO
+*/
+TEST(PiezasTest, O_wins_3x1_middle_right){
+	Piezas obj;
+	obj.dropPiece(1);
+	obj.dropPiece(1);
+	obj.dropPiece(2);
+	obj.dropPiece(0);
+
+	obj.dropPiece(0);
+	obj.dropPiece(3);
+	obj.dropPiece(0);
+	obj.dropPiece(3);
+
+	obj.dropPiece(3);
+	obj.dropPiece(2);
+	obj.dropPiece(2);
+	obj.dropPiece(1);
+
+	ASSERT_TRUE(obj.gameState() == O);
+}
 // Testing a tied pattern
 /* Pattern:
 	XOOX
