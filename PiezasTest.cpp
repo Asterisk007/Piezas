@@ -59,7 +59,7 @@ TEST(PiezasTest, reset_board_is_blank){
 	bool actual = true;
 	for (int i = 0; i < 3; i++){
 		for (int j = 0; j < 4; j++){
-			if (board.pieceAt(i, j) != Blank){
+			if (obj.pieceAt(i, j) != Blank){
 				actual = false;
 			}
 		}
