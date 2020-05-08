@@ -300,6 +300,57 @@ TEST(PiezasTest, X_wins_4x1_middle){
 
 	ASSERT_EQ(obj.gameState(), X);
 }
+// O wins
+/* Pattern:
+	OXXX
+	OOOO
+	OXXX
+*/
+TEST(PiezasTest, O_wins_4x1_middle_flipped){
+	Piezas obj;
+	obj.dropPiece(3);
+	obj.dropPiece(3);
+	obj.dropPiece(2);
+	obj.dropPiece(2);
+
+	obj.dropPiece(1);
+	obj.dropPiece(0);
+	obj.dropPiece(1);
+	obj.dropPiece(3);
+
+	obj.dropPiece(2);
+	obj.dropPiece(0);
+	obj.dropPiece(1);
+	obj.dropPiece(0);
+
+	ASSERT_EQ(obj.gameState(), O);
+}
+// X wins
+/* Pattern:
+	XOOO
+	XXXX
+	XOOO
+*/
+TEST(PiezasTest, X_wins_4x1_middle_flipped){
+	Piezas obj;
+	obj.dropPiece(0);
+	obj.dropPiece(3);
+	obj.dropPiece(3);
+	obj.dropPiece(2);
+
+	obj.dropPiece(2);
+	obj.dropPiece(1);
+	obj.dropPiece(1);
+	obj.dropPiece(3);
+
+	obj.dropPiece(0);
+	obj.dropPiece(2);
+	obj.dropPiece(0);
+	obj.dropPiece(1);
+
+	ASSERT_EQ(obj.gameState(), X);
+}
+
 
 // Now for some dummy patterns (i.e. completely irregular games, but ensures that the class
 // can determine that a game where both players forming the same number of lines is counted as a tie)
