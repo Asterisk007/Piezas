@@ -249,7 +249,8 @@ TEST(PiezasTest, tie_game_1){
 
 	ASSERT_TRUE(obj.gameState() == Blank);
 }
-// Testing a tied pattern
+
+// O wins
 /* Pattern:
 	XXXO
 	OOOO
@@ -272,9 +273,9 @@ TEST(PiezasTest, tie_game_2){
 	obj.dropPiece(2);
 	obj.dropPiece(3);
 
-	ASSERT_TRUE(obj.gameState() == Blank);
-}\
-// Testing a tied pattern
+	ASSERT_TRUE(obj.gameState() == O);
+}
+// X wins
 /* Pattern:
 	OOOX
 	XXXX
@@ -297,7 +298,7 @@ TEST(PiezasTest, tie_game_3){
 	obj.dropPiece(0);
 	obj.dropPiece(0);
 
-	ASSERT_TRUE(obj.gameState() == Blank);
+	ASSERT_TRUE(obj.gameState() == X);
 }
 
 // Now for some dummy patterns (i.e. completely irregular games, but ensures that the class

@@ -137,16 +137,20 @@ Piece Piezas::gameState()
     * [1,0][1,1][1,2][1,3]
     * [0,0][0,1][0,2][0,3]
     */
-    int player_X_lines = 0;
-    int player_O_lines = 0;
+    int player_X_3x1_rows = 0;
+    int player_X_4x1_rows = 0;
+    int player_X_cols = 0;
+    int player_O_3x1_rows = 0;
+    int player_O_4x1_rows = 0;
+    int player_O_cols = 0;
     // Check for the same piece on every column
     // 3x1
     for (int i = 0; i < 4; i++){
         if ( (board[2][i] == board[1][i]) && (board[1][i] == board[0][i]) ){
             if (board[2][i] == X){
-                player_X_lines += 1;
+                player_X_cols += 1;
             } else {
-                player_O_lines += 1;
+                player_O_cols += 1;
             }
         }
     }
@@ -155,15 +159,15 @@ Piece Piezas::gameState()
     for (int i = 0; i < 3; i++){
         if ( (board[i][0] == board[i][1]) && (board[i][1] == board[i][2]) && (board[i][2] != board[i][3]) ){
             if (board[i][1] == X){
-                player_X_lines += 1;
+                player_X_3x1_rows += 1;
             } else {
-                player_O_lines += 1;
+                player_O_3x1_rows += 1;
             }
         } else if ( (board[i][0] != board[i][1]) && (board[i][1] == board[i][2]) && (board[i][2] == board[i][3]) ){
             if (board[i][1] == X){
-                player_X_lines += 1;
+                player_X_3x1_rows += 1;
             } else {
-                player_O_lines += 1;
+                player_O_3x1_rows += 1;
             }
         }
     }
@@ -171,17 +175,55 @@ Piece Piezas::gameState()
     for (int i = 0; i < 3; i++){
         if ( (board[i][0] == board[i][1]) && (board[i][1] == board[i][2]) && (board[i][2] == board[i][3]) ){
             if (board[i][0] == X){
-                player_X_lines += 1;
+                player_X_4x1_rows += 1;
             } else {
-                player_O_lines += 1;
+                player_O_4x1_rows += 1;
             }
         }
     }
 
-    // The player with the greatest number of lines on the board (4x1 row(s), 3x1 rows(s), or 3x1 column(s)) wins
-    if ( player_X_lines > player_O_lines ){
+    // The player with the largest number of pieces in a row wins:
+    /**
+     * Winning patterns:
+     * OXXO
+     * XXOX
+     * OOOX
+     * > O wins
+     * OXOX
+     * XXXO
+     * OOXO
+     * > X wins
+     * XXXO
+     * OOOO
+     * XXXO
+     * > O wins
+     * XOOO
+     * XOOO
+     * XXXX
+     * Tied patterns:
+     * XOXO
+     * OOOO
+     * XXXX
+     * 
+     * XOXO
+     * XOXO
+     * XOXO
+     * 
+     * XXOO
+     * XOOO
+     * XXXO
+     */
+    if ( (player_X_cols + player_X_3x1_rows) > (player_O_cols + player_O_3x1_rows) ){
         return X;
-    } else if (player_O_lines > player_X_lines){
+    } else if ( (player_O_cols + player_O_3x1_rows) > (player_X_cols + player_X_3x1_rows) ){
+        return O;
+    } else if ( (player_X_4x1_rows > 0) && (player_O_4x1_rows == 0) ){
+        // Players who have a whole row win by default (unless their opponent does too, in which case
+        // it's a tie.)
+        return X;
+    } else if ( (player_O_4x1_rows > 0) && (player_X_4x1_rows == 0) ){
+        // Players who have a whole row win by default (unless their opponent does too, in which case
+        // it's a tie.)
         return O;
     } else {
         return Blank;
