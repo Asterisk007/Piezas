@@ -192,6 +192,10 @@ Piece Piezas::gameState()
      * OOOO
      * XXXO
      * > O wins
+     * OOOX
+     * XXXX
+     * OOOX
+     * > X wins
      * XOOO
      * XOOO
      * XXXX
@@ -209,15 +213,15 @@ Piece Piezas::gameState()
      * XOOO
      * XXXO
      */
-    if ( (player_X_cols + player_X_3x1_rows) > (player_O_cols + player_O_3x1_rows) ){
+    if ( (player_X_cols + player_X_3x1_rows) > (player_O_cols + player_O_3x1_rows) && !(player_O_4x1_rows > 0) ){
         return X;
-    } else if ( (player_O_cols + player_O_3x1_rows) > (player_X_cols + player_X_3x1_rows) ){
+    } else if ( (player_O_cols + player_O_3x1_rows) > (player_X_cols + player_X_3x1_rows) && !(player_X_4x1_rows > 0) ){
         return O;
-    } else if ( (player_X_4x1_rows > 0) && (player_O_4x1_rows == 0) ){
+    } else if ( (player_X_4x1_rows > 0) && (player_O_4x1_rows < player_X_4x1_rows) ){
         // Players who have a whole row win by default (unless their opponent does too, in which case
         // it's a tie.)
         return X;
-    } else if ( (player_O_4x1_rows > 0) && (player_X_4x1_rows == 0) ){
+    } else if ( (player_O_4x1_rows > 0) && (player_X_4x1_rows < player_O_4x1_rows) ){
         // Players who have a whole row win by default (unless their opponent does too, in which case
         // it's a tie.)
         return O;
