@@ -157,13 +157,8 @@ Piece Piezas::gameState()
     // Check for the same piece on every row
     // 3x1
     for (int i = 0; i < 3; i++){
-        if ( (board[i][0] == board[i][1]) && (board[i][1] == board[i][2]) && (board[i][2] != board[i][3]) ){
-            if (board[i][1] == X){
-                player_X_3x1_rows += 1;
-            } else {
-                player_O_3x1_rows += 1;
-            }
-        } else if ( (board[i][0] != board[i][1]) && (board[i][1] == board[i][2]) && (board[i][2] == board[i][3]) ){
+        if ( ((board[i][0] == board[i][1]) && (board[i][1] == board[i][2]) && (board[i][2] != board[i][3])) ||
+             ((board[i][0] != board[i][1]) && (board[i][1] == board[i][2]) && (board[i][2] == board[i][3])) ){
             if (board[i][1] == X){
                 player_X_3x1_rows += 1;
             } else {
@@ -200,6 +195,7 @@ Piece Piezas::gameState()
      * XOOO
      * XOOO
      * XXXX
+     * > X wins
      * Tied patterns:
      * XOXO
      * OOOO

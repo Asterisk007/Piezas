@@ -69,7 +69,7 @@ TEST(PiezasTest, out_of_bounds_column_returns_invalid){
 TEST(PiezasTest, unfinished_game_returns_invalid){
 	Piezas obj;
 	obj.dropPiece(0);
-	ASSERT_TRUE(obj.gameState() == Invalid);
+	ASSERT_EQ(obj.gameState(), Invalid);
 }
 
 // Esure that resetting the board causes all spaces to be Blank
@@ -115,7 +115,7 @@ TEST(PiezasTest, tie_game){
 		}
 		alternate = !alternate;
 	}
-	ASSERT_TRUE(obj.gameState() == Blank);
+	ASSERT_EQ(obj.gameState(), Blank);
 }
 
 // Testing a pattern where X wins
@@ -143,7 +143,7 @@ TEST(PiezasTest, X_wins_3x1_middle_right){
 	/*
 	Board should now have the specified pattern
 	*/
-	ASSERT_TRUE(obj.gameState() == X);
+	ASSERT_EQ(obj.gameState(), X);
 }
 
 // Testing a pattern where O wins
@@ -170,7 +170,7 @@ TEST(PiezasTest, O_wins_3x1_bottom_left){
 	obj.dropPiece(0);
 	// O should win by the horizontal 3x1 line in the lower
 	// left corner of the board.
-	ASSERT_TRUE(obj.gameState() == O);
+	ASSERT_EQ(obj.gameState(), O);
 }
 // Testing a pattern where X wins
 // For the sake of satisfying the code coverage
@@ -196,7 +196,7 @@ TEST(PiezasTest, X_wins_3x1_middle_left){
 	obj.dropPiece(1);
 	obj.dropPiece(0);
 
-	ASSERT_TRUE(obj.gameState() == X);
+	ASSERT_EQ(obj.gameState(), X);
 }
 // Testing a pattern where O wins
 // For the sake of satisfying the code coverage
@@ -222,7 +222,7 @@ TEST(PiezasTest, O_wins_3x1_middle_right){
 	obj.dropPiece(2);
 	obj.dropPiece(1);
 
-	ASSERT_TRUE(obj.gameState() == O);
+	ASSERT_EQ(obj.gameState(), O);
 }
 // Testing a tied pattern
 /* Pattern:
@@ -247,7 +247,7 @@ TEST(PiezasTest, tie_game_1){
 	obj.dropPiece(3);
 	obj.dropPiece(2);
 
-	ASSERT_TRUE(obj.gameState() == Blank);
+	ASSERT_EQ(obj.gameState(), Blank);
 }
 
 // O wins
@@ -256,7 +256,7 @@ TEST(PiezasTest, tie_game_1){
 	OOOO
 	XXXO
 */
-TEST(PiezasTest, tie_game_2){
+TEST(PiezasTest, O_wins_4x1_middle){
 	Piezas obj;
 	obj.dropPiece(0);
 	obj.dropPiece(0);
@@ -273,7 +273,7 @@ TEST(PiezasTest, tie_game_2){
 	obj.dropPiece(2);
 	obj.dropPiece(3);
 
-	ASSERT_TRUE(obj.gameState() == O);
+	ASSERT_EQ(obj.gameState(), O);
 }
 // X wins
 /* Pattern:
@@ -281,7 +281,7 @@ TEST(PiezasTest, tie_game_2){
 	XXXX
 	OOOX
 */
-TEST(PiezasTest, tie_game_3){
+TEST(PiezasTest, X_wins_4x1_middle){
 	Piezas obj;
 	obj.dropPiece(3);
 	obj.dropPiece(2);
@@ -298,7 +298,7 @@ TEST(PiezasTest, tie_game_3){
 	obj.dropPiece(0);
 	obj.dropPiece(0);
 
-	ASSERT_TRUE(obj.gameState() == X);
+	ASSERT_EQ(obj.gameState(), X);
 }
 
 // Now for some dummy patterns (i.e. completely irregular games, but ensures that the class
@@ -319,7 +319,7 @@ TEST(PiezasTest, tie_game_columns){
 	}
 	// Players have an equal number of columns. Thus,
 	// the game is a tie.
-	ASSERT_TRUE(obj.gameState() == Blank);
+	ASSERT_EQ(obj.gameState(), Blank);
 }
 
 // This game is also a tie, but using another pattern
@@ -328,7 +328,7 @@ TEST(PiezasTest, tie_game_columns){
 	OOOO
 	XXXX
 */
-TEST(PiezasTest, tie_game_rows){
+TEST(PiezasTest, tie_game_4x1_rows){
 	Piezas obj;
 	
 	obj.dropPiece(0);
@@ -348,5 +348,5 @@ TEST(PiezasTest, tie_game_rows){
 
 	// Players have an equal number of rows.
 	// Thus, the game is a tie.
-	ASSERT_TRUE(obj.gameState() == Blank);
+	ASSERT_EQ(obj.gameState(), Blank);
 }
